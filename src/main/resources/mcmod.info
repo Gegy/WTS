@@ -1,0 +1,11 @@
+[
+    {
+        "modid": "wts",
+        "name": "What's That Slot",
+        "version": "${version}",
+		"mcversion": "${mcversion}",
+        "authorList": ["gegy1000"],
+        "dependencies": [],
+        "description": "What's That Slot (WTS) allows you to check what items can be put into hovered slot with a single press of a key!"
+    }
+]
