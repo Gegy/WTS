@@ -48,18 +48,21 @@ public class SlotRenderer {
             int slotY = -WhatsThatSlot.scroll;
             RenderHelper.enableGUIStandardItemLighting();
             for (ItemStack stack : WhatsThatSlot.VALID_ITEMS) {
-                if (slotY >= 0) {
-                    int renderSlotX = slotX * 18 + 7;
-                    int renderSlotY = slotY * 18 + renderY + 7;
-                    renderItem.renderItemIntoGUI(stack, renderSlotX, renderSlotY);
-                }
-                slotX++;
-                if (slotX >= 5) {
-                    slotY++;
-                    slotX = 0;
-                }
-                if (slotY >= 8) {
-                    break;
+                try {
+                    if (slotY >= 0) {
+                        int renderSlotX = slotX * 18 + 7;
+                        int renderSlotY = slotY * 18 + renderY + 7;
+                        renderItem.renderItemIntoGUI(stack, renderSlotX, renderSlotY);
+                    }
+                    slotX++;
+                    if (slotX >= 5) {
+                        slotY++;
+                        slotX = 0;
+                    }
+                    if (slotY >= 8) {
+                        break;
+                    }
+                } catch (Exception e) {
                 }
             }
             GlStateManager.disableLighting();

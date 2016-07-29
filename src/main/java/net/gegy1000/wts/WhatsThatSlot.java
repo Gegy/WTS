@@ -57,7 +57,7 @@ public class WhatsThatSlot {
             VALID_ITEMS.clear();
             if (infoSlot != null) {
                 for (ItemStack stack : WhatsThatSlot.ITEMS) {
-                    if (WhatsThatSlot.infoSlot.isItemValid(stack)) {
+                    if (stack != null && WhatsThatSlot.infoSlot.isItemValid(stack)) {
                         VALID_ITEMS.add(stack);
                     }
                 }
