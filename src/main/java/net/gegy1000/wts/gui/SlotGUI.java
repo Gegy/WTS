@@ -3,10 +3,11 @@ package net.gegy1000.wts.gui;
 import net.gegy1000.wts.SlotPlaceInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import org.lwjgl.opengl.GL11;
@@ -38,7 +39,8 @@ public abstract class SlotGUI {
         GlStateManager.enableLighting();
         GlStateManager.enableDepth();
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        GuiUtils.drawHoveringText(stack.getTooltip(MC.player, MC.gameSettings.advancedItemTooltips), mouseX, mouseY, resolution.getScaledWidth(), resolution.getScaledHeight(), -1, MC.fontRendererObj);
+        ITooltipFlag.TooltipFlags flag = MC.gameSettings.advancedItemTooltips ? ITooltipFlag.TooltipFlags.ADVANCED : ITooltipFlag.TooltipFlags.NORMAL;
+        GuiUtils.drawHoveringText(stack.getTooltip(MC.player, flag), mouseX, mouseY, resolution.getScaledWidth(), resolution.getScaledHeight(), -1, MC.fontRenderer);
     }
 
     protected void drawRectangle(int x, int y, int width, int height) {
@@ -48,7 +50,7 @@ public abstract class SlotGUI {
         GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         GlStateManager.shadeModel(7425);
         Tessellator tessellator = Tessellator.getInstance();
-        VertexBuffer buffer = tessellator.getBuffer();
+        BufferBuilder buffer = tessellator.getBuffer();
         buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION);
         buffer.pos(x, y + height, 0.0).endVertex();
         buffer.pos(x + width, y + height, 0.0).endVertex();
@@ -65,7 +67,7 @@ public abstract class SlotGUI {
         float widthScale = 1.0F / textureWidth;
         float heightScale = 1.0F / textureHeight;
         Tessellator tessellator = Tessellator.getInstance();
-        VertexBuffer buffer = tessellator.getBuffer();
+        BufferBuilder buffer = tessellator.getBuffer();
         buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
         buffer.pos(x, y + height, 0.0).tex(textureX * widthScale, (textureY + height) * heightScale).endVertex();
         buffer.pos(x + width, y + height, 0.0).tex((textureX + width) * widthScale, (textureY + height) * heightScale).endVertex();

@@ -51,9 +51,13 @@ public class WhatsThatSlot {
             if (item instanceof ItemAir) {
                 continue;
             }
-            NonNullList<ItemStack> stacks = NonNullList.create();
-            item.getSubItems(item, item.getCreativeTab(), stacks);
-            ITEMS.addAll(stacks);
+            if (item.getCreativeTab() != null) {
+                NonNullList<ItemStack> stacks = NonNullList.create();
+                item.getSubItems(item.getCreativeTab(), stacks);
+                ITEMS.addAll(stacks);
+            } else {
+                ITEMS.add(new ItemStack(item));
+            }
         }
 
         ClientRegistry.registerKeyBinding(KEY_CHECK_SLOT);

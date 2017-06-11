@@ -45,7 +45,7 @@ public class VanillaSlotGUI extends SlotGUI {
             ScaledResolution resolution = new ScaledResolution(MC);
             int renderY = (resolution.getScaledHeight() / 2) - (156 / 2);
             this.drawTexturedRectangle(0, renderY, 0, 0, 117, 156, 256, 256);
-            MC.fontRendererObj.drawStringWithShadow("What's That Slot?", 14, renderY - 10, 0xFFFFFF);
+            MC.fontRenderer.drawStringWithShadow("What's That Slot?", 14, renderY - 10, 0xFFFFFF);
             int maxScroll = this.placeInfo.getMaxScroll();
             if (this.scroll > maxScroll) {
                 this.scroll = maxScroll;
